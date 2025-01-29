@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Demo Bahis Sitesi</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #1a1a1a;
+            color: white;
+            text-align: center;
+            margin: 0;
+        }
+        .container {
+            width: 90%;
+            max-width: 600px;
+            margin: auto;
+            padding-top: 50px;
+        }
+        input, button {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 5px;
+            border: none;
+        }
+        button {
+            background-color: #ffcc00;
+            color: black;
+            cursor: pointer;
+        }
+        .odds {
+            margin-top: 20px;
+            background: #222;
+            padding: 15px;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Demo Bahis Sitesi</h1>
+        <h3>Giriş Yap</h3>
+        <input type="text" placeholder="Kullanıcı Adı" id="username">
+        <input type="password" placeholder="Şifre" id="password">
+        <button onclick="login()">Giriş Yap</button>
+        
+        <div class="odds">
+            <h2>Canlı Bahisler</h2>
+            <p>Real Madrid - Barcelona | Oran: <span id="odd">2.30</span></p>
+            <button onclick="bet()">Bahis Yap</button>
+        </div>
+    </div>
+
+    <script>
+        async function login() {
+            const username = document.getElementById("username").value;
+            const password = document.getElementById("password").value;
+    
+            const response = await fetch('/login', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ username, password })
+            });
+    
+            const result = await response.json();
+            
+            if (response.ok) {
+                alert(result.message);
+                window.location.href = result.redirect;  // Kullanıcıyı home sayfasına yönlendir
+            } else {
+                alert(result.message);
+            }
+        }
+    </script>
+    
+</body>
+</html>

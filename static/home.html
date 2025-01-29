@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Anasayfa</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #1a1a1a;
+            color: white;
+            text-align: center;
+        }
+        .container {
+            margin-top: 50px;
+        }
+        .bet {
+            background: #222;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Bahis Sitesi Anasayfası</h1>
+        <p>Hoş geldiniz! Burada en güncel bahisleri oynayabilirsiniz.</p>
+        <div class="bet">
+            <h3>Real Madrid - Barcelona</h3>
+            <p>Oran: 2.30</p>
+            <button onclick="bet()">Bahis Yap</button>
+        </div>
+        <button onclick="logout()">Çıkış Yap</button>
+    </div>
+
+    <script>
+        function bet() {
+            fetch('/bet', { method: 'POST' })
+                .then(response => response.json())
+                .then(data => alert(data.message));
+        }
+
+        function logout() {
+            window.location.href = "/";
+        }
+    </script>
+</body>
+</html>
